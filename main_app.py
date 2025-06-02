@@ -44,9 +44,8 @@ async def talent_search(query_request: ParseQueryRequest): # Use direct import h
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"NLP Parsing Error: {e}")
 
-    # 2. Convert NLP output to GitHub search params
-    # Note: GitHubSearchParams expects a dict, so we convert from Pydantic model
-    github_search_params = GitHubSearchParams(**parsed_nlp_output.dict())
+    # 2. Convert NLP output to search params
+    github_search_params = SearchParams(**parsed_nlp_output.dict())
 
     # 3. Use GitHub Agent to find candidates
     try:
